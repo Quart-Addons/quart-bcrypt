@@ -2,7 +2,7 @@
 
 Quart-Bcrypt is a Quart extension that provides bcrypt hashing utilities for
 your application. Orginal code from Flash-Bcrypt, which can be found at 
-https://github.com/crood58/quart-bcrypt
+https://github.com/maxcountryman/flask-bcrypt
 
 Due to the recent increased prevelance of powerful hardware, such as modern
 GPUs, hashes have become increasingly easy to crack. A proactive solution to
