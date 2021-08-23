@@ -38,4 +38,7 @@ need to use decode('utf-8') on generate_password_hash().
 
 ## Documentation
 
-Coming Soon! 
+The documentation for Flask-Bcrypt can used for Quart-Bcrypt and is available [here][docs].
+Just remember that you need to call quart instead of flask and quart_bcrypt instead of quart_bcrypt. 
+
+[docs]: https://flask-bcrypt.readthedocs.io/en/latest/
