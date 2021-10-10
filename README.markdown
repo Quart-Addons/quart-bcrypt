@@ -38,4 +38,4 @@ need to use decode('utf-8') on generate_password_hash().
 
 ## Documentation
 
-Under Construction 
+View documentation at https://quart-bcrypt.readthedocs.io/en/latest/
