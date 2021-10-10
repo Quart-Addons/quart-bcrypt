@@ -23,15 +23,15 @@ Install the extension with the following command:
 
 To use the extension simply import the class wrapper and pass the Quart app
 object back to here. Do so like this:
-    
+
     from quart import Quart
     from quart_bcrypt import Bcrypt
     
     app = Quart(__name__)
     bcrypt = Bcrypt(app)
 
-Two primary hashing methods are now exposed by way of the bcrypt object. Note that you 
-need to use decode('utf-8') on generate_password_hash(). 
+Two primary hashing methods are now exposed by way of the bcrypt object. Note that you
+need to use decode('utf-8') on generate_password_hash().
 
     pw_hash = bcrypt.generate_password_hash('hunter2').decode('utf-8')
     bcrypt.check_password_hash(pw_hash, 'hunter2') # returns True

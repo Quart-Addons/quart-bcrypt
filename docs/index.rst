@@ -23,11 +23,7 @@ Installation
 
 Install the extension with one of the following commands:
 
-    $ easy_install flask-bcrypt
-
-or alternatively if you have pip installed:
-    
-    $ pip3 install flask-bcrypt
+    $ pip3 install quart-bcrypt
 
 .. note::
     You need Python Development Headers to install py-bcrypt package, needed
@@ -64,4 +60,3 @@ ___
 .. autofunction:: quart_bcrypt.generate_password_hash
 
 .. autofunction:: quart_bcrypt.check_password_hash
-
