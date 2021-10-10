@@ -1,3 +1,4 @@
+LICENSE
 quart_bcrypt.py
 setup.py
 Quart_Bcrypt.egg-info/PKG-INFO
