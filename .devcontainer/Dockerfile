@@ -10,6 +10,7 @@ RUN pip3 install quart
 RUN pip3 install sphinx 
 RUN pip3 install sphinxcontrib-napoleon
 RUN pip3 install pydata-sphinx-theme
+RUN pip3 install twine 
 
 WORKDIR /workspaces/quiart-bcrypt/
 
