@@ -1,2 +1,2 @@
 pydata_sphinx_theme
-sphinx.ext.napoleon
+sphinxcontrib-napoleon
