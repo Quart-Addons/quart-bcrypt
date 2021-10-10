@@ -53,7 +53,7 @@ Note you need to use decode('utf-8') on generate_password_hash(), like below:
     pw_hash = bcrypt.generate_password_hash('hunter2').decode('utf-8')
 
 API
-___
+-----
 .. autoclass:: quart_bcrypt.Bcrypt
     :members:
 
