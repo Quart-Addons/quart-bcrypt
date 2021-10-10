@@ -8,11 +8,8 @@ A Quart extension providing bcrypt hashing and comparison facilities.
 from __future__ import absolute_import
 from __future__ import print_function
 
-__version_info__ = ('0', '0', '3a')
-__version__ = '.'.join(__version_info__)
-__author__ = 'Chris Rood'
-__license__ = 'BSD'
-__copyright__ = '(c) 2021 Chris Rood'
+__version__ = "0.0.4"
+
 __all__ = ['Bcrypt', 'check_password_hash', 'generate_password_hash']
 
 import hmac
