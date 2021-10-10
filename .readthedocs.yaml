@@ -16,7 +16,6 @@ build:
 sphinx:
    builder: html 
    configuration: docs/conf.py
-   dirhtml: docs/_build/html
 
 # Optionally build your docs in additional formats such as PDF
 formats:
