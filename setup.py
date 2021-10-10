@@ -15,7 +15,7 @@ setup(
     name='Quart-Bcrypt',
     version=__version__,
     url='https://github.com/crood58/quart-bcrypt',
-    download_url="https://www.github.com/marirs/quart-bcrypt/tags",
+    download_url="https://github.com/crood58/quart-bcrypt/archive/refs/tags/0.0.2.tar.gz",
     license='BSD',
     author='Chris Rood',
     author_email='crood58@gmail.com',
