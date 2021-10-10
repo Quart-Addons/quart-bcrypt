@@ -3,7 +3,7 @@ Quart-Bcrypt
 
 .. module:: quart_bcrypt
 
-Quart-Bcrypt is a Quart extension that provides bcrypt hashing utilities for
+'Quart-Bcrypt'_ is a 'Quart'_ extension that provides bcrypt hashing utilities for
 your application.
 
 Due to the recent increased prevalence of powerful hardware, such as modern
@@ -36,21 +36,24 @@ Usage
 
 To use the extension simply import the class wrapper and pass the Quart app
 object back to here. Do so like this::
-    
-    from quart import Quart
-    from quart_bcrypt import Bcrypt
-    
-    app = Quart(__name__)
-    bcrypt = Quart(app)
+
+    ..code-block: python
+        from quart import Quart
+        from quart_bcrypt import Bcrypt
+        
+        app = Quart(__name__)
+        bcrypt = Quart(app)
 
 Two primary hashing methods are now exposed by way of the bcrypt object.
 
-    pw_hash = pw_hash = bcrypt.generate_password_hash('hunter2').decode('utf-8')
-    bcrypt.check_password_hash(pw_hash, 'hunter2') # returns True
+    ..code-block: python
+        pw_hash = pw_hash = bcrypt.generate_password_hash('hunter2').decode('utf-8')
+        bcrypt.check_password_hash(pw_hash, 'hunter2') # returns True
     
 Note you need to use decode('utf-8') on generate_password_hash(), like below:
 
-    pw_hash = bcrypt.generate_password_hash('hunter2').decode('utf-8')
+    ..code-block: python
+        pw_hash = bcrypt.generate_password_hash('hunter2').decode('utf-8')
 
 API
 -----
