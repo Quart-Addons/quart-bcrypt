@@ -98,8 +98,8 @@ html_theme = 'pydata_sphinx_theme'
 #
 html_theme_options = {
   "external_links": [
-      {"name": "Source code", "url": "https://gitlab.com/pgjones/quart"},
-      {"name": "Issues", "url": "https://gitlab.com/pgjones/quart/issues"},
+      {"name": "Source code", "url": "https://github.com/crood58/quart-bcrypt"},
+      {"name": "Issues", "url": "https://github.com/crood58/quart-bcrypt/issues"},
   ]
 }
 
