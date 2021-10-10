@@ -18,9 +18,11 @@
 #
 import os
 import sys
-sys.path.insert(os.path.join(os.path.dirname(__file__), '../quart_bcrypt.py'))
+
 
 module_path = os.path.join(os.path.dirname(__file__), '../quart_bcrypt.py')
+
+sys.path.insert(module_path)
 
 with open(module_path) as module:
     for line in module:
