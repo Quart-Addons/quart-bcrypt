@@ -11,6 +11,12 @@ with open(os.path.join(this_directory, 'README.markdown')) as f:
 
 __version__ = '.'.join(eval(version_line.split('__version_info__ = ')[-1]))
 
+doc_extras = [
+    'Sphinx >= 5.0.0', 
+    'pydata_sphinx_theme',
+    'sphinxcontrib-napoleon'
+]
+
 setup(
     name='Quart-Bcrypt',
     version=__version__,
@@ -26,6 +32,7 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=['Quart>=0.15.1', 'bcrypt>=3.2.0'],
+    extra_requires=doc_extras,
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
