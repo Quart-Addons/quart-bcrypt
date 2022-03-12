@@ -1,7 +1,7 @@
 # Quart-Bcrypt
 
 Quart-Bcrypt is a Quart extension that provides bcrypt hashing utilities for
-your application. Orginal code from Flash-Bcrypt, which can be found at 
+your application. Orginal code from Flash-Bcrypt, which can be found at
 https://github.com/maxcountryman/flask-bcrypt
 
 Due to the recent increased prevelance of powerful hardware, such as modern
@@ -16,7 +16,7 @@ advisable choice.
 ## Installation
 
 Install the extension with the following command:
-    
+
     $ pip3 install quart-bcrypt
 
 ## Usage
