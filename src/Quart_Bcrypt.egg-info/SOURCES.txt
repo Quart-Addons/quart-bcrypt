@@ -1,9 +1,0 @@
-LICENSE
-setup.cfg
-setup.py
-src/Quart_Bcrypt.egg-info/PKG-INFO
-src/Quart_Bcrypt.egg-info/SOURCES.txt
-src/Quart_Bcrypt.egg-info/dependency_links.txt
-src/Quart_Bcrypt.egg-info/requires.txt
-src/Quart_Bcrypt.egg-info/top_level.txt
-src/quart_bcrypt/__init__.py
