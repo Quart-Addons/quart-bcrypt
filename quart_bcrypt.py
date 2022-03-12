@@ -17,7 +17,7 @@ __version__ = '.'.join(__version_info__)
 __author__ = 'Chris Rood'
 __license__ = 'BSD'
 __copyright__ = '(c) 2022 by Chris Rood'
-__all__ = ['Bcrypt', 'check_password_hash', 'generate_password_hash']
+__all__ = ['Bcrypt', 'check_password_hash', 'generate_password_hash', 'async_check_password_hash', 'async_generate_password_hash']
 
 import bcrypt
 
