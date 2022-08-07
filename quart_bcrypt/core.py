@@ -83,19 +83,59 @@ class Bcrypt(object):
     _prefix = '2b'
     _handle_long_passwords = False
 
-    def __init__(self, app: t.Optional[Quart]=None) -> None:
-        if app is not None:
-            self.init_app(app)
+    def __init__(
+        self,
+        app: t.Optional[Quart]=None,
+        log_rounds: int = 12,
+        prefix: str = '2b',
+        long_passwords: bool = False
+        ) -> None:
+        self.app = app
 
-    def init_app(self, app: Quart) -> None:
+        if app is not None:
+            self.init_app(app, log_rounds, prefix, long_passwords)
+
+    def init_app(
+        self,
+        app: Quart,
+        log_rounds: int = 12,
+        prefix: str = '2b',
+        long_passwords: bool = False
+        ) -> None:
         '''Initalizes the application with the extension.
 
         :param app: The Quart application object.
         '''
-        self._log_rounds = app.config.setdefault('BCRYPT_LOG_ROUNDS', 12)
-        self._prefix = app.config.setdefault('BCRYPT_HASH_PREFIX', '2b')
+        if self.app is None:
+            self.app = app
+
+        app.extensions['bcrypt'] = self
+
+        app.config.setdefault('BCRYPT_LOG_ROUNDS', log_rounds)
+        self._prefix = app.config.setdefault('BCRYPT_HASH_PREFIX', prefix)
         self._handle_long_passwords = app.config.setdefault(
-            'BCRYPT_HANDLE_LONG_PASSWORDS', False)
+            'BCRYPT_HANDLE_LONG_PASSWORDS', long_passwords)
+
+    @property
+    def _log_rounds(self) -> int:
+        """
+        Log rounds to use for Bcrypt.
+        """
+        return self.app.config.get('BCRYPT_LOG_ROUNDS')
+
+    @property
+    def _prefix(self) -> str:
+        """
+        The prefix to use for Bcrypt.
+        """
+        return self.app.config.get('BCRYPT_HASH_PREFIX')
+
+    @property
+    def _handle_long_passwords(self) -> bool:
+        """
+        Handle long passwords or not.
+        """
+        return self.app.config.get('BCRYPT_HANDLE_LONG_PASSWORDS')
 
     def _unicode_to_bytes(self, unicode_string: t.Union[str, bytes]) -> bytes:
         '''Converts a unicode string to a bytes object.
