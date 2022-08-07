@@ -87,10 +87,13 @@ class Bcrypt(object):
         self,
         app: t.Optional[Quart]=None,
         log_rounds: int = 12,
-        prefix: str = '2b',
+        prefix: t.Union[str, bytes] = '2b',
         long_passwords: bool = False
         ) -> None:
-        self.app = app
+
+        self._log_rounds: int = log_rounds
+        self._prefix: t.Union[str, bytes] = prefix
+        self._handle_long_passwords: bool = False
 
         if app is not None:
             self.init_app(app, log_rounds, prefix, long_passwords)
@@ -106,38 +109,18 @@ class Bcrypt(object):
 
         :param app: The Quart application object.
         '''
-        if self.app is None:
-            self.app = app
-
         app.extensions['bcrypt'] = self
 
-        app.config.setdefault('BCRYPT_LOG_ROUNDS', log_rounds)
+        self._log_rounds = app.config.setdefault('BCRYPT_LOG_ROUNDS', log_rounds)
         self._prefix = app.config.setdefault('BCRYPT_HASH_PREFIX', prefix)
-        self._handle_long_passwords = app.config.setdefault(
-            'BCRYPT_HANDLE_LONG_PASSWORDS', long_passwords)
+        self._handle_long_passwords = (
+            app.config.setdefault('BCRYPT_HANDLE_LONG_PASSWORDS', long_passwords)
+            )
 
-    @property
-    def _log_rounds(self) -> int:
-        """
-        Log rounds to use for Bcrypt.
-        """
-        return self.app.config.get('BCRYPT_LOG_ROUNDS')
-
-    @property
-    def _prefix(self) -> str:
-        """
-        The prefix to use for Bcrypt.
-        """
-        return self.app.config.get('BCRYPT_HASH_PREFIX')
-
-    @property
-    def _handle_long_passwords(self) -> bool:
-        """
-        Handle long passwords or not.
-        """
-        return self.app.config.get('BCRYPT_HANDLE_LONG_PASSWORDS')
-
-    def _unicode_to_bytes(self, unicode_string: t.Union[str, bytes]) -> bytes:
+    def _unicode_to_bytes(
+        self,
+        unicode_string: t.Union[str, bytes]
+        ) -> bytes:
         '''Converts a unicode string to a bytes object.
 
         :param unicode_string: The unicode string to convert.'''
@@ -149,8 +132,11 @@ class Bcrypt(object):
 
         return bytes_object
 
-    def generate_password_hash(self, password: str, rounds: t.Optional[int]=None,
-                               prefix=None) -> bytes:
+    def generate_password_hash(
+        self,
+        password: t.Union[str, bytes],
+        rounds: t.Optional[int]=None,
+        prefix: t.Optional[t.Union[str, bytes]]=None) -> bytes:
         '''Generates a password hash using bcrypt. Specifying `rounds`
         sets the log_rounds parameter of `bcrypt.gensalt()` which determines
         the complexity of the salt. 12 is the default value. Specifying `prefix`
@@ -168,7 +154,7 @@ class Bcrypt(object):
         '''
 
         if not password:
-            raise ValueError('Password must be non-empty.')
+            raise ValueError('Password cannot be none.')
 
         if rounds is None:
             rounds = self._log_rounds
@@ -211,8 +197,12 @@ class Bcrypt(object):
 
         return hmac.compare_digest(bcrypt.hashpw(password, pw_hash), pw_hash)
 
-    async def async_generate_password_hash(self, password: str, rounds: t.Optional[int]=None,
-                                          prefix=None) -> bytes:
+    async def async_generate_password_hash(
+        self,
+        password: t.Union[str, bytes],
+        rounds: t.Optional[int]=None,
+        prefix: t.Optional[t.Union[str, bytes]]=None
+        ) -> bytes:
         """Wraps the generate_password_hash function in Quarts run_sync function to
         ensure the sync function is run within the event loop.
 

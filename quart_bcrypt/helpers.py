@@ -8,7 +8,7 @@ from typing import Optional
 from quart.utils import run_sync
 from .core import Bcrypt
 
-def generate_password_hash(password: str, rounds: Optional[int]=None) -> bytes:
+def generate_password_hash(password, rounds=None) -> bytes:
     '''This helper function wraps the eponymous method of :class:`Bcrypt`. It
     is intended to be used as a helper function at the expense of the
     configuration variable provided when passing back the app object. In other
