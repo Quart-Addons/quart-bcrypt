@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "quart-bcrypt"
+version = "0.0.6"
+description = "Quart-Bcrypt is a Quart extension that provides bcrypt hashing utilities for your application."
+authors = ["Chris Rood <quart.addons@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+quart = "^0.18.0"
+bcrypt = "^3.2.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+pytest-asyncio = "^0.19.0"
+Sphinx = "^5.1.1"
+pydata-sphinx-theme = "^0.9.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
