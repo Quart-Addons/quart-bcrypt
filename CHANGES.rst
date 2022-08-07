@@ -1,6 +1,7 @@
 0.0.6 XX.XX.XXXX
 ----------------
 
+* Updated .gitignore file.
 * Started using Poetry.
 * Updated VS Code dev container to use Poetry.
 * Updated license to MIT. 
