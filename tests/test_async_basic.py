@@ -13,15 +13,16 @@ def bcrypt(app: quart.Quart, extension: quart_bcrypt.Bcrypt) -> quart_bcrypt.Bcr
     """
     app.config['BCRYPT_HANDLE_LONG_PASSWORDS'] = False
 
-    bcrypt = extension.init_app(app)
+    extension.init_app(app)
 
-    return bcrypt
+    return extension
 
-def test_is_string(bcrypt):
+@pytest.mark.asyncio
+async def test_is_string(bcrypt):
     """
     Test if a string can generate a password hash.
     """
-    pw_hash = bcrypt.generate_password_hash('secret')
+    pw_hash = await bcrypt.async_generate_password_hash('secret')
     assert isinstance(pw_hash, bytes) is True
 
 @pytest.mark.asyncio
@@ -78,7 +79,7 @@ async def test_unicode_hash(bcrypt):
     Tests a password hash using a unicode.
     """
     password = '東京'
-    pw_hash = await bcrypt.async_generate_password_hash(password).decode('utf-8')
+    pw_hash = (await bcrypt.async_generate_password_hash(password)).decode('utf-8')
 
     res = await bcrypt.async_check_password_hash(pw_hash, password)
     assert res is True

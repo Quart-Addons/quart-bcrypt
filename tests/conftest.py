@@ -2,27 +2,25 @@
 Pytest confif file for Quart Bcrypt.
 """
 import pytest
-import quart
-import quart_bcrypt
+from quart import Quart
+from quart_bcrypt import Bcrypt
 
 @pytest.fixture
-def app() -> quart.Quart:
+def app() -> Quart:
     """
     Returns a Quart app for the
     basic test of Quart Bcrypt.
     """
-    app = quart.Quart(__name__)
+    app = Quart(__name__)
     app.config['BCRYPT_LOG_ROUNDS'] = 6
     app.config['BCRYPT_HASH_PREFIX'] = '2b'
-    app.config['BCRYPT_HANDLE_LONG_PASSWORDS'] = False
-
     return app
 
 @pytest.fixture
-def extension() -> quart_bcrypt.Bcrypt:
+def extension() -> Bcrypt:
     """
     Returns a Quart Bcrypt obeject for
     testing.
     """
-    bcrypt = quart_bcrypt.Bcrypt()
+    bcrypt = Bcrypt()
     return bcrypt

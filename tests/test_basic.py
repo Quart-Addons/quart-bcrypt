@@ -3,19 +3,19 @@ Basic test of Quart Bcrypt.
 """
 import pytest
 import quart
-import quart_bcrypt
+from quart_bcrypt import Bcrypt, generate_password_hash, check_password_hash
 
 @pytest.fixture
-def bcrypt(app: quart.Quart, extension: quart_bcrypt.Bcrypt) -> quart_bcrypt.Bcrypt:
+def bcrypt(app: quart.Quart, extension: Bcrypt) -> Bcrypt:
     """
     Returns a Quart Bcrypt obeject for
     testing.
     """
     app.config['BCRYPT_HANDLE_LONG_PASSWORDS'] = False
 
-    bcrypt = extension.init_app(app)
+    extension.init_app(app)
 
-    return bcrypt
+    return extension
 
 def test_is_string(bcrypt):
     """
@@ -55,8 +55,8 @@ def test_check_hash(bcrypt):
 
     # check helper function
     password = 'hunter2'
-    pw_hash = quart_bcrypt.generate_password_hash(password)
-    res = quart_bcrypt.check_password_hash(pw_hash, password)
+    pw_hash = generate_password_hash(password)
+    res = check_password_hash(pw_hash, password)
     assert res is True
 
 def test_check_hash_unicode_is_utf8(bcrypt):

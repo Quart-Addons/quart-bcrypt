@@ -2,20 +2,20 @@
 Password long test of Quart Bcrypt.
 """
 import pytest
-import quart
-import quart_bcrypt
+from quart import Quart
+from quart_bcrypt import Bcrypt
 
 @pytest.fixture
-def bcrypt(app: quart.Quart, extension: quart_bcrypt.Bcrypt) -> quart_bcrypt.Bcrypt:
+def bcrypt(app: Quart, extension: Bcrypt) -> Bcrypt:
     """
     Returns a Quart Bcrypt obeject for
     testing.
     """
     app.config['BCRYPT_HANDLE_LONG_PASSWORDS'] = True
 
-    bcrypt = extension.init_app(app)
+    extension.init_app(app)
 
-    return bcrypt
+    return extension
 
 def test_long_password(bcrypt):
     """

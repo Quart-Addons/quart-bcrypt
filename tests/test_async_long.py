@@ -13,9 +13,9 @@ def bcrypt(app: quart.Quart, extension: quart_bcrypt.Bcrypt) -> quart_bcrypt.Bcr
     """
     app.config['BCRYPT_HANDLE_LONG_PASSWORDS'] = True
 
-    bcrypt = extension.init_app(app)
+    extension.init_app(app)
 
-    return bcrypt
+    return extension
 
 @pytest.mark.asyncio
 async def test_long_password(bcrypt):
