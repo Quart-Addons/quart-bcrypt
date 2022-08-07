@@ -1,2 +1,0 @@
-Quart
-bcrypt>=3.1.1

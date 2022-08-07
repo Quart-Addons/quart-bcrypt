@@ -1,8 +1,0 @@
-quart_bcrypt.py
-setup.py
-Quart_Bcrypt.egg-info/PKG-INFO
-Quart_Bcrypt.egg-info/SOURCES.txt
-Quart_Bcrypt.egg-info/dependency_links.txt
-Quart_Bcrypt.egg-info/not-zip-safe
-Quart_Bcrypt.egg-info/requires.txt
-Quart_Bcrypt.egg-info/top_level.txt
