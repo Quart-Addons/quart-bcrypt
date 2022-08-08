@@ -1,5 +1,7 @@
 # Quart-Bcrypt
 
+![Quart Bcrypt Logo](logos/logo.png)
+
 Quart-Bcrypt is a Quart extension that provides bcrypt hashing utilities for
 your application. Orginal code from Flash-Bcrypt, which can be found at
 https://github.com/maxcountryman/flask-bcrypt
