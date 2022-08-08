@@ -4,6 +4,27 @@ version = "0.0.6"
 description = "Quart-Bcrypt is a Quart extension that provides bcrypt hashing utilities for your application."
 authors = ["Chris Rood <quart.addons@gmail.com>"]
 license = "MIT"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+readme = "README.md"
+repository = "https://github.com/Quart-Addons/quart-bcrypt"
+documentation = "https://quart-bcrypt.readthedocs.io"
+packages = [
+    { include = "quart_bcrypt"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -15,6 +36,43 @@ pytest = "^7.1.2"
 pytest-asyncio = "^0.19.0"
 Sphinx = "^5.1.1"
 pydata-sphinx-theme = "^0.9.0"
+
+[tool.black]
+line-length = 100
+target-version = ["py37"]
+
+[tool.isort]
+combine_as_imports = true
+force_grid_wrap = 0
+include_trailing_comma = true
+known_first_party = "quart_uploads, tests"
+line_length = 100
+multi_line_output = 3
+no_lines_before = "LOCALFOLDER"
+order_by_type = false
+reverse_relative = true
+
+[tool.mypy]
+allow_redefinition = true
+disallow_any_generics = false
+disallow_subclassing_any = true
+disallow_untyped_calls = false
+disallow_untyped_defs = true
+implicit_reexport = true
+no_implicit_optional = true
+show_error_codes = true
+strict = true
+strict_equality = true
+strict_optional = false
+warn_redundant_casts = true
+warn_return_any = false
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+addopts = "--no-cov-on-fail --showlocals --strict-markers"
+asyncio_mode = "auto"
+testpaths = ["tests"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
