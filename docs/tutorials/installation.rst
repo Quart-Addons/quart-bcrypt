@@ -1,3 +1,5 @@
+.. _installation:
+
 ============
 Installation
 ============
@@ -19,3 +21,12 @@ package manager.
     as a dependency. If you are on Mac OS or Windows, you probably have it
     already installed. Otherwise look for python-dev package for Debian-based
     distributives and for python-devel package for RedHat-based.
+
+Dependencies
+------------
+
+Quart Uploads depends on the following packages, which will automatically
+be installed with the extension.
+
+- `Quart <https://quart.palletsprojects.com>`_
+- `bcrypt <https://github.com/pyca/bcrypt/>`_ 

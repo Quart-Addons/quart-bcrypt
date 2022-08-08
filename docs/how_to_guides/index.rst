@@ -5,8 +5,6 @@ How to Guides
 .. toctree::
    :maxdepth: 1
 
-
-   installation.rst
    configuration.rst
    general_useage.rst
    sync_class_wrapper.rst

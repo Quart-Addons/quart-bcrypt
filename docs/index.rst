@@ -1,8 +1,15 @@
+:orphan:
+
+.. title:: Quart Bcrypt Documentation
+
+.. image:: _static/logo.png
+   :width: 300px
+   :alt: Quart Bcrypt logo
+   :align: right
+
 ============
 Quart-Bcrypt
 ============
-
-.. module:: quart_bcrypt
 
 Quart-Bcrypt is a Quart extension that provides bcrypt hashing utilities for
 your application. It provides sync and async capabilities for your application. 
@@ -22,6 +29,14 @@ For more information on Quart, `click here <https://pgjones.gitlab.io/quart/>`_ 
 
 Quart-Bcrypt is based on `Flask-Bcrypt <https://github.com/maxcountryman/flask-bcrypt>`_ by maxcountryman. 
 
+Tutorials
+---------
+
+.. toctree::
+   :maxdepth: 2
+
+   tutorials/index.rst
+
 How to guides
 -------------
 
@@ -30,13 +45,13 @@ How to guides
 
    how_to_guides/index.rst
 
-API
----
+References
+----------
 
 .. toctree::
    :maxdepth: 2
 
-   api/index.rst
+   references/index.rst
 
 
 

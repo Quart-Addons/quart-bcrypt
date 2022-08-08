@@ -1,3 +1,5 @@
+.. _api_helpers:
+
 ================
 Helper Functions
 ================
