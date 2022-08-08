@@ -1,6 +1,13 @@
-0.0.6 XX.XX.XXXX
+0.0.6 08.07.2022
 ----------------
 
+* Updated README.
+* Updated documentation.
+* Created a logo for Quart Bcrypt.
+* Converted all tests of extension over to pytest.
+* In *quart_bcrypt.Bcrypt.init_app* registered bcrypt with *quart.Quart.extension* as bcrypt.
+* Added the ability to pass log_rounds, hash_prefix, and long_passwords arugements to 
+  *quart_bcrypt.Bcrypt*.
 * Updated .gitignore file.
 * Started using Poetry.
 * Updated VS Code dev container to use Poetry.
