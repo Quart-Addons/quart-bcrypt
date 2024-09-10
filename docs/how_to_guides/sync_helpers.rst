@@ -4,7 +4,7 @@
 Sync Helper Functions 
 ================================
 
-Quart-Bcrypt provides sync helper functions that wraps eponymous
+Quart-Bcrypt provides sync helper functions that wraps the
 method of the Bcrypt class. They are intended as a helper function
 at the expense of the configuration variables provided when passing
 the Quart app object. In another words these shortcuts does not make

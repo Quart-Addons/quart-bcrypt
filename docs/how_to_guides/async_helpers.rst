@@ -4,7 +4,7 @@
 Async Helper Functions 
 ================================
 
-Quart-Bcrypt provides async helper functions that wraps eponymous
+Quart-Bcrypt provides async helper functions that wraps the
 method of the Bcrypt class. They are intended as a helper function
 at the expense of the configuration variables provided when passing
 the Quart app object. In another words these shortcuts does not make
@@ -35,5 +35,5 @@ For checking passwords against the hashed password use the following:
 .. Note::
     Quart-Bcrypt uses Quarts run_sync method to wrap the generate password 
     hash and check password hash functions, so they run within the event loop. 
-    Refer to the `Quart how to guide <https://pgjones.gitlab.io/quart/how_to_guides/sync_code.html>`_  
+    Refer to the `Quart how to guide <https://quart.palletsprojects.com/en/latest/how_to_guides/sync_code.html>`_  
     for additional information. 

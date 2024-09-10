@@ -27,7 +27,7 @@ For checking passwords against the hashed password use the following:
 .. Note::
     Quart-Bcrypt uses Quarts run_sync method to wrap the generate password 
     hash and check password hash functions, so they run within the event loop. 
-    Refer to the `Quart how to guide <https://pgjones.gitlab.io/quart/how_to_guides/sync_code.html>`_  
+    Refer to the `Quart how to guide <https://quart.palletsprojects.com/en/latest/how_to_guides/sync_code.html>`_  
     for additional information. 
 
 

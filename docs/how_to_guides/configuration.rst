@@ -5,7 +5,7 @@ Configuration
 =============
 
 The following configurations values can be set with the application configuration, 
-which will be set in Quart-Bcrypt when the Quart App is passed to the extesnion. 
+which will be set in Quart-Bcrypt when the Quart App is passed to the extension. 
 
 +--------------------------------+------+---------+-------------------------------+
 | Config Variable                | Type | Default | Description                   |
