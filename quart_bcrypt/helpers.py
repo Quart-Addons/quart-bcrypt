@@ -2,7 +2,6 @@
 quart_bcrypt.helpers
 """
 import typing as t
-from quart.utils import run_sync
 
 from .core import Bcrypt
 
@@ -72,7 +71,7 @@ async def async_generate_password_hash(
     :param password: The password to be hashed.
     :param rounds: The optional number of rounds.
     """
-    return await run_sync(generate_password_hash)(password, rounds)
+    return await Bcrypt().async_generate_password_hash(password, rounds)
 
 
 async def async_check_password_hash(pw_hash: bytes, password: str) -> bool:
@@ -92,4 +91,4 @@ async def async_check_password_hash(pw_hash: bytes, password: str) -> bool:
     :param pw_hash: The hash to be compared against.
     :param password: The password to compare.
     """
-    return await run_sync(check_password_hash)(pw_hash, password)
+    return await Bcrypt().async_check_password_hash(pw_hash, password)
