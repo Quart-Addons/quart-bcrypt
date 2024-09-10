@@ -24,7 +24,8 @@
 				"ms-python.mypy-type-checker",
 				"ms-python.black-formatter",
 				"ms-python.autopep8",
-				"ms-python.isort"
+				"ms-python.isort",
+				"streetsidesoftware.code-spell-checker"
 			]
 		}
 	},
