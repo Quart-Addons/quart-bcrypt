@@ -9,8 +9,13 @@ A Quart extension providing bcrypt hashing and comparison facilities.
 """
 
 from .core import Bcrypt
-from .helpers import (generate_password_hash, check_password_hash,
-                     async_generate_password_hash, async_check_password_hash)
+
+from .helpers import (
+    generate_password_hash,
+    check_password_hash,
+    async_generate_password_hash,
+    async_check_password_hash
+)
 
 __all__ = (
     'Bcrypt',
