@@ -3,10 +3,18 @@ Tests Quart Bcrypt Async functions for the basic test.
 """
 import pytest
 import quart
-import quart_bcrypt
+
+from quart_bcrypt import (
+    Bcrypt,
+    async_generate_password_hash,
+    async_check_password_hash
+)
+
 
 @pytest.fixture
-def bcrypt(app: quart.Quart, extension: quart_bcrypt.Bcrypt) -> quart_bcrypt.Bcrypt:
+def bcrypt(
+    app: quart.Quart, extension: Bcrypt
+) -> Bcrypt:
     """
     Returns a Quart Bcrypt obeject for
     testing.
@@ -17,25 +25,29 @@ def bcrypt(app: quart.Quart, extension: quart_bcrypt.Bcrypt) -> quart_bcrypt.Bcr
 
     return extension
 
+
 @pytest.mark.asyncio
-async def test_is_string(bcrypt):
+async def test_is_string(bcrypt: Bcrypt) -> None:
     """
     Test if a string can generate a password hash.
     """
     pw_hash = await bcrypt.async_generate_password_hash('secret')
     assert isinstance(pw_hash, bytes) is True
 
+
 @pytest.mark.asyncio
-async def test_custom_rounds(bcrypt):
+async def test_custom_rounds(bcrypt: Bcrypt) -> None:
     """
     Tests custom rounds
     """
     password = 'secret'
+    password = str.encode(password)
     pw_hash = await bcrypt.async_generate_password_hash(password, 5)
     assert password != pw_hash
 
+
 @pytest.mark.asyncio
-async def test_check_hash(bcrypt):
+async def test_check_hash(bcrypt: Bcrypt) -> None:
     """
     Tests password hashing
     """
@@ -58,12 +70,13 @@ async def test_check_hash(bcrypt):
 
     # check helper function
     password = 'hunter2'
-    pw_hash = await quart_bcrypt.async_generate_password_hash(password)
-    res = await quart_bcrypt.async_check_password_hash(pw_hash, password)
+    pw_hash = await async_generate_password_hash(password)
+    res = await async_check_password_hash(pw_hash, password)
     assert res is True
 
+
 @pytest.mark.asyncio
-async def test_check_hash_unicode_is_utf8(bcrypt):
+async def test_check_hash_unicode_is_utf8(bcrypt: Bcrypt) -> None:
     """
     Tests the checked hash unicode is utf-8
     """
@@ -73,19 +86,23 @@ async def test_check_hash_unicode_is_utf8(bcrypt):
     res = await bcrypt.async_check_password_hash(pw_hash, b'\xe2\x98\x83')
     assert res is True
 
+
 @pytest.mark.asyncio
-async def test_unicode_hash(bcrypt):
+async def test_unicode_hash(bcrypt: Bcrypt) -> None:
     """
     Tests a password hash using a unicode.
     """
     password = '東京'
-    pw_hash = (await bcrypt.async_generate_password_hash(password)).decode('utf-8')
+    pw_hash = (
+        await bcrypt.async_generate_password_hash(password)
+        ).decode('utf-8')
 
     res = await bcrypt.async_check_password_hash(pw_hash, password)
     assert res is True
 
+
 @pytest.mark.asyncio
-async def test_long_password(bcrypt):
+async def test_long_password(bcrypt: Bcrypt) -> None:
     """
     Test bcrypt maximum password length.
 

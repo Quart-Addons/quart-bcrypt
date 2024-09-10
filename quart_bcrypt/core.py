@@ -1,7 +1,5 @@
 """
 quart_bcrypt.core
-
-The core Bcrypt class.
 """
 import typing as t
 import hmac
@@ -11,8 +9,10 @@ import bcrypt
 from quart import Quart
 from quart.utils import run_sync
 
+
 class Bcrypt(object):
-    '''Bcrypt class container for password hashing and checking logic using
+    '''
+    Bcrypt class container for password hashing and checking logic using
     bcrypt, of course. This class may be used to intialize your Quart app
     object. The purpose is to provide a simple interface for overriding
     Werkzeug's built-in password hashing utilities.
@@ -79,69 +79,64 @@ class Bcrypt(object):
     :param app: The Quart application object. Defaults to None.
     '''
 
-    _log_rounds = 12
-    _prefix = '2b'
-    _handle_long_passwords = False
+    _log_rounds: int = 12
+    _prefix: t.Union[str, bytes] = '2b'
+    _handle_long_passwords: bool = False
 
-    def __init__(
-        self,
-        app: t.Optional[Quart]=None,
-        log_rounds: int = 12,
-        prefix: t.Union[str, bytes] = '2b',
-        long_passwords: bool = False
-        ) -> None:
-
-        self._log_rounds: int = log_rounds
-        self._prefix: t.Union[str, bytes] = prefix
-        self._handle_long_passwords: bool = False
+    def __init__(self, app: t.Optional[Quart] = None) -> None:
 
         if app is not None:
-            self.init_app(app, log_rounds, prefix, long_passwords)
+            self.init_app(app)
 
-    def init_app(
-        self,
-        app: Quart,
-        log_rounds: int = 12,
-        prefix: str = '2b',
-        long_passwords: bool = False
-        ) -> None:
-        '''Initalizes the application with the extension.
+    def init_app(self, app: Quart) -> None:
+        '''
+        Initalizes the application with the extension.
 
         :param app: The Quart application object.
         '''
         app.extensions['bcrypt'] = self
 
-        self._log_rounds = app.config.setdefault('BCRYPT_LOG_ROUNDS', log_rounds)
-        self._prefix = app.config.setdefault('BCRYPT_HASH_PREFIX', prefix)
+        self._log_rounds = app.config.setdefault(
+            'BCRYPT_LOG_ROUNDS', 12
+            )
+        self._prefix = app.config.setdefault(
+            'BCRYPT_HASH_PREFIX', '2b'
+            )
         self._handle_long_passwords = (
-            app.config.setdefault('BCRYPT_HANDLE_LONG_PASSWORDS', long_passwords)
+            app.config.setdefault(
+                'BCRYPT_HANDLE_LONG_PASSWORDS', False
+                )
             )
 
     def _unicode_to_bytes(
         self,
         unicode_string: t.Union[str, bytes]
-        ) -> bytes:
-        '''Converts a unicode string to a bytes object.
+    ) -> bytes:
+        '''
+        Converts a unicode string to a bytes object.
 
         :param unicode_string: The unicode string to convert.'''
 
         if isinstance(unicode_string, str):
-            bytes_object = bytes(unicode_string, 'utf-8')
-        else:
-            bytes_object = unicode_string
+            return str.encode(unicode_string)
 
-        return bytes_object
+        if not isinstance(unicode_string, bytes):
+            raise TypeError("The value needs to be string or bytes.")
+
+        return unicode_string
 
     def generate_password_hash(
         self,
         password: t.Union[str, bytes],
-        rounds: t.Optional[int]=None,
-        prefix: t.Optional[t.Union[str, bytes]]=None) -> bytes:
-        '''Generates a password hash using bcrypt. Specifying `rounds`
+        rounds: t.Optional[int] = None,
+        prefix: t.Optional[t.Union[str, bytes]] = None
+    ) -> bytes:
+        '''
+        Generates a password hash using bcrypt. Specifying `rounds`
         sets the log_rounds parameter of `bcrypt.gensalt()` which determines
-        the complexity of the salt. 12 is the default value. Specifying `prefix`
-        sets the `prefix` parameter of `bcrypt.gensalt()` which determines the
-        version of the algorithm used to create the hash.
+        the complexity of the salt. 12 is the default value. Specifying
+        `prefix`sets the `prefix` parameter of `bcrypt.gensalt()` which
+        determines the version of the algorithm used to create the hash.
 
         Example usage of :class:`generate_password_hash` might look something
         like this::
@@ -172,8 +167,12 @@ class Bcrypt(object):
         salt = bcrypt.gensalt(rounds=rounds, prefix=prefix)
         return bcrypt.hashpw(password, salt)
 
-    def check_password_hash(self, pw_hash: bytes, password: str) -> bool:
-        '''Tests a password hash against a candidate password. The candidate
+    def check_password_hash(
+            self, pw_hash: t.Union[str, bytes],
+            password: t.Union[str, bytes]
+    ) -> bool:
+        '''
+        Tests a password hash against a candidate password. The candidate
         password is first hashed and then subsequently compared in constant
         time to the existing hash. This will either return `True` or `False`.
 
@@ -200,14 +199,15 @@ class Bcrypt(object):
     async def async_generate_password_hash(
         self,
         password: t.Union[str, bytes],
-        rounds: t.Optional[int]=None,
-        prefix: t.Optional[t.Union[str, bytes]]=None
-        ) -> bytes:
-        """Wraps the generate_password_hash function in Quarts run_sync function to
-        ensure the sync function is run within the event loop.
+        rounds: t.Optional[int] = None,
+        prefix: t.Optional[t.Union[str, bytes]] = None
+    ) -> bytes:
+        """
+        Wraps the generate_password_hash function in Quarts run_sync function
+        to ensure the sync function is run within the event loop.
 
-        Example usage of :class:`async_generate_password_hash` might look something
-        like this::
+        Example usage of :class:`async_generate_password_hash` might look
+        something like this::
 
             pw_hash = await bcrypt.async_generate_password_hash('secret', 10)
 
@@ -216,14 +216,20 @@ class Bcrypt(object):
         :param prefix: The algorithm version to use.
         """
 
-        return await run_sync(self.generate_password_hash)(password, rounds, prefix)
+        return await run_sync(
+            self.generate_password_hash)(password, rounds, prefix)
 
-    async def async_check_password_hash(self, pw_hash: bytes, password: str) -> bool:
-        """Wraps the check_password_hash function in Quarts run_sync function to
+    async def async_check_password_hash(
+            self,
+            pw_hash: t.Union[str, bytes],
+            password: t.Union[str, bytes]
+    ) -> bool:
+        """
+        Wraps the check_password_hash function in Quarts run_sync function to
         ensure the sync function is run within the event loop.
 
-        Example usage of :class:`async_check_password_hash` would look something
-        like this::
+        Example usage of :class:`async_check_password_hash` would look
+        something like this::
 
             pw_hash = await bcrypt.async_generate_password_hash('secret', 10)
             await bcrypt.check_password_hash(pw_hash, 'secret') # returns True

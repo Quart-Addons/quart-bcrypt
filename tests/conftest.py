@@ -1,9 +1,10 @@
 """
-Pytest confif file for Quart Bcrypt.
+tests.conftest
 """
 import pytest
 from quart import Quart
 from quart_bcrypt import Bcrypt
+
 
 @pytest.fixture
 def app() -> Quart:
@@ -15,6 +16,7 @@ def app() -> Quart:
     app.config['BCRYPT_LOG_ROUNDS'] = 6
     app.config['BCRYPT_HASH_PREFIX'] = '2b'
     return app
+
 
 @pytest.fixture
 def extension() -> Bcrypt:

@@ -3,10 +3,12 @@ Tests Quart Bcrypt Async functions for the long test.
 """
 import pytest
 import quart
-import quart_bcrypt
+
+from quart_bcrypt import Bcrypt
+
 
 @pytest.fixture
-def bcrypt(app: quart.Quart, extension: quart_bcrypt.Bcrypt) -> quart_bcrypt.Bcrypt:
+def bcrypt(app: quart.Quart, extension: Bcrypt) -> Bcrypt:
     """
     Returns a Quart Bcrypt obeject for
     testing.
@@ -17,8 +19,9 @@ def bcrypt(app: quart.Quart, extension: quart_bcrypt.Bcrypt) -> quart_bcrypt.Bcr
 
     return extension
 
+
 @pytest.mark.asyncio
-async def test_long_password(bcrypt):
+async def test_long_password(bcrypt: Bcrypt) -> None:
     """
     Test the work around bcrypt maximum password length.
     """

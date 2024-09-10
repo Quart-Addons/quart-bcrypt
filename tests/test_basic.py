@@ -5,6 +5,7 @@ import pytest
 import quart
 from quart_bcrypt import Bcrypt, generate_password_hash, check_password_hash
 
+
 @pytest.fixture
 def bcrypt(app: quart.Quart, extension: Bcrypt) -> Bcrypt:
     """
@@ -17,22 +18,26 @@ def bcrypt(app: quart.Quart, extension: Bcrypt) -> Bcrypt:
 
     return extension
 
-def test_is_string(bcrypt):
+
+def test_is_string(bcrypt: Bcrypt) -> None:
     """
     Test if a string can generate a password hash.
     """
     pw_hash = bcrypt.generate_password_hash('secret')
     assert isinstance(pw_hash, bytes) is True
 
-def test_custom_rounds(bcrypt):
+
+def test_custom_rounds(bcrypt: Bcrypt) -> None:
     """
     Tests custom rounds
     """
     password = 'secret'
+    password = str.encode(password)
     pw_hash = bcrypt.generate_password_hash(password, 5)
     assert password != pw_hash
 
-def test_check_hash(bcrypt):
+
+def test_check_hash(bcrypt: Bcrypt) -> None:
     """
     Tests password hashing
     """
@@ -47,7 +52,7 @@ def test_check_hash(bcrypt):
     res = bcrypt.check_password_hash(pw_hash, 'hunter2')
     assert res is False
 
-    # check unicode 
+    # check unicode
     password = '\u2603'
     pw_hash = bcrypt.generate_password_hash(password)
     res = bcrypt.check_password_hash(pw_hash, password)
@@ -59,7 +64,8 @@ def test_check_hash(bcrypt):
     res = check_password_hash(pw_hash, password)
     assert res is True
 
-def test_check_hash_unicode_is_utf8(bcrypt):
+
+def test_check_hash_unicode_is_utf8(bcrypt: Bcrypt) -> None:
     """
     Tests the checked hash unicode is utf-8
     """
@@ -69,7 +75,8 @@ def test_check_hash_unicode_is_utf8(bcrypt):
     res = bcrypt.check_password_hash(pw_hash, b'\xe2\x98\x83')
     assert res is True
 
-def test_rounds_set(bcrypt):
+
+def test_rounds_set(bcrypt: Bcrypt) -> None:
     """
     Tests if the rounds are set in the
     `Bcrypt` object.
@@ -77,7 +84,8 @@ def test_rounds_set(bcrypt):
     rounds = bcrypt._log_rounds
     assert rounds == 6
 
-def test_unicode_hash(bcrypt):
+
+def test_unicode_hash(bcrypt: Bcrypt) -> None:
     """
     Tests a password hash using a unicode.
     """
@@ -87,7 +95,8 @@ def test_unicode_hash(bcrypt):
     res = bcrypt.check_password_hash(pw_hash, password)
     assert res is True
 
-def test_long_password(bcrypt):
+
+def test_long_password(bcrypt: Bcrypt) -> None:
     """
     Test bcrypt maximum password length.
 

@@ -5,6 +5,7 @@ import pytest
 from quart import Quart
 from quart_bcrypt import Bcrypt
 
+
 @pytest.fixture
 def bcrypt(app: Quart, extension: Bcrypt) -> Bcrypt:
     """
@@ -17,7 +18,8 @@ def bcrypt(app: Quart, extension: Bcrypt) -> Bcrypt:
 
     return extension
 
-def test_long_password(bcrypt):
+
+def test_long_password(bcrypt: Bcrypt) -> None:
     """
     Test the work around bcrypt maximum password length.
     """
