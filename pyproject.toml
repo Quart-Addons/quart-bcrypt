@@ -39,7 +39,6 @@ pydata-sphinx-theme = "*"
 
 [tool.black]
 line-length = 100
-target-version = ["py37"]
 
 [tool.isort]
 combine_as_imports = true
@@ -68,11 +67,6 @@ warn_redundant_casts = true
 warn_return_any = false
 warn_unused_configs = true
 warn_unused_ignores = true
-
-[tool.pytest.ini_options]
-addopts = "--no-cov-on-fail --showlocals --strict-markers"
-asyncio_mode = "auto"
-testpaths = ["tests"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
