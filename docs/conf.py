@@ -9,7 +9,7 @@
 project = 'Quart Bcrypt'
 copyright = '2022, Chris Rood'
 author = 'Chris Rood'
-release = '0.0.8'
+release = '0.0.9'
 version = release
 
 # -- General configuration ---------------------------------------------------
