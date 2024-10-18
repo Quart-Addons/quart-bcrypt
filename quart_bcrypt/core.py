@@ -1,7 +1,8 @@
 """
 quart_bcrypt.core
 """
-import typing as t
+from __future__ import annotations
+from typing import Optional, Union
 import hmac
 import hashlib
 
@@ -13,11 +14,11 @@ from quart.utils import run_sync
 class Bcrypt(object):
     '''
     Bcrypt class container for password hashing and checking logic using
-    bcrypt, of course. This class may be used to intialize your Quart app
+    bcrypt, of course. This class may be used to initialize your Quart app
     object. The purpose is to provide a simple interface for overriding
     Werkzeug's built-in password hashing utilities.
 
-    Although such methods are not actually overriden, the API is intentionally
+    Although such methods are not actually overridden, the API is intentionally
     made similar so that existing applications which make use of the previous
     hashing functions might be easily adapted to the stronger facility of
     bcrypt.
@@ -51,7 +52,7 @@ class Bcrypt(object):
         It's worth noting that if you use the format, `bcrypt = Bcrypt(app)`
         you are effectively overriding the bcrypt module. Though it's unlikely
         you would need to access the module outside of the scope of the
-        extension be aware that it's overriden.
+        extension be aware that it's overridden.
 
         Alternatively consider using a different name, such as `quart_bcrypt
         = Bcrypt(app)` to prevent naming collisions.
@@ -80,17 +81,17 @@ class Bcrypt(object):
     '''
 
     _log_rounds: int = 12
-    _prefix: t.Union[str, bytes] = '2b'
+    _prefix: Union[str, bytes] = '2b'
     _handle_long_passwords: bool = False
 
-    def __init__(self, app: t.Optional[Quart] = None) -> None:
+    def __init__(self, app: Optional[Quart] = None) -> None:
 
         if app is not None:
             self.init_app(app)
 
     def init_app(self, app: Quart) -> None:
         '''
-        Initalizes the application with the extension.
+        Initializes the application with the extension.
 
         :param app: The Quart application object.
         '''
@@ -110,7 +111,7 @@ class Bcrypt(object):
 
     def _unicode_to_bytes(
         self,
-        unicode_string: t.Union[str, bytes]
+        unicode_string: Union[str, bytes]
     ) -> bytes:
         '''
         Converts a unicode string to a bytes object.
@@ -127,9 +128,9 @@ class Bcrypt(object):
 
     def generate_password_hash(
         self,
-        password: t.Union[str, bytes],
-        rounds: t.Optional[int] = None,
-        prefix: t.Optional[t.Union[str, bytes]] = None
+        password: Union[str, bytes],
+        rounds: Optional[int] = None,
+        prefix: Optional[Union[str, bytes]] = None
     ) -> bytes:
         '''
         Generates a password hash using bcrypt. Specifying `rounds`
@@ -168,8 +169,8 @@ class Bcrypt(object):
         return bcrypt.hashpw(password, salt)
 
     def check_password_hash(
-            self, pw_hash: t.Union[str, bytes],
-            password: t.Union[str, bytes]
+            self, pw_hash: Union[str, bytes],
+            password: Union[str, bytes]
     ) -> bool:
         '''
         Tests a password hash against a candidate password. The candidate
@@ -198,9 +199,9 @@ class Bcrypt(object):
 
     async def async_generate_password_hash(
         self,
-        password: t.Union[str, bytes],
-        rounds: t.Optional[int] = None,
-        prefix: t.Optional[t.Union[str, bytes]] = None
+        password: Union[str, bytes],
+        rounds: Optional[int] = None,
+        prefix: Optional[Union[str, bytes]] = None
     ) -> bytes:
         """
         Wraps the generate_password_hash function in Quarts run_sync function
@@ -221,8 +222,8 @@ class Bcrypt(object):
 
     async def async_check_password_hash(
             self,
-            pw_hash: t.Union[str, bytes],
-            password: t.Union[str, bytes]
+            pw_hash: Union[str, bytes],
+            password: Union[str, bytes]
     ) -> bool:
         """
         Wraps the check_password_hash function in Quarts run_sync function to
