@@ -1,14 +1,15 @@
 """
 quart_bcrypt.helpers
 """
-import typing as t
+from __future__ import annotations
+from typing import Optional, Union
 
 from .core import Bcrypt
 
 
 def generate_password_hash(
-        password: t.Union[str, bytes],
-        rounds: t.Optional[int] = None
+        password: Union[str, bytes],
+        rounds: Optional[int] = None
 ) -> bytes:
     '''
     This helper function wraps the eponymous method of :class:`Bcrypt`. It
@@ -30,8 +31,8 @@ def generate_password_hash(
 
 
 def check_password_hash(
-        pw_hash: t.Union[str, bytes],
-        password: t.Union[str, bytes]
+        pw_hash: Union[str, bytes],
+        password: Union[str, bytes]
 ) -> bool:
     '''
     This helper function wraps the eponymous method of :class:`Bcrypt.` It
@@ -53,7 +54,7 @@ def check_password_hash(
 
 
 async def async_generate_password_hash(
-        password: str, rounds: t.Optional[int] = None
+        password: Union[str, bytes], rounds: Optional[int] = None
 ) -> bytes:
     """
     This async helper function wraps the eponymous method of :class:`Bcrypt`.
@@ -74,7 +75,9 @@ async def async_generate_password_hash(
     return await Bcrypt().async_generate_password_hash(password, rounds)
 
 
-async def async_check_password_hash(pw_hash: bytes, password: str) -> bool:
+async def async_check_password_hash(
+        pw_hash: Union[str, bytes], password: str
+) -> bool:
     """This async helper function wraps the eponymous method of
     :class:`Bcrypt.` It is intended to be used as a helper function at the
     expense of the configuration variable provided when passing back the app
