@@ -1,5 +1,8 @@
 # Quart-Bcrypt
 
+> [!WARNING]
+> This package is no longer being maintained or developed.
+
 ![Quart Bcrypt Logo](logos/logo.png)
 
 Quart-Bcrypt is a Quart extension that provides bcrypt hashing utilities for
